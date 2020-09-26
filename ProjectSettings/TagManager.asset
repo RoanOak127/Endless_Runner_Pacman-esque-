@@ -8,6 +8,10 @@ TagManager:
   - Enemy
   - Obstacle
   - Wall
+  - Death
+  - Ball
+  - PowerUp
+  - PowerDown
   layers:
   - Default
   - TransparentFX

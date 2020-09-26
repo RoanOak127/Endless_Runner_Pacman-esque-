@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 6515351126840371332}
   - component: {fileID: 7929216676382184838}
   - component: {fileID: 7881181169796007779}
-  - component: {fileID: -336027835544065153}
+  - component: {fileID: 5347973625084383753}
+  - component: {fileID: 1065005447982136792}
+  - component: {fileID: -6008185241382143026}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Enemy
@@ -663,7 +665,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &-336027835544065153
+--- !u!114 &5347973625084383753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -672,7 +674,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 3968189394148803050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed96ed3c4cfab234b9ee885c02cdb1d6, type: 3}
+  m_Script: {fileID: 11500000, guid: f7ffa931473f07146954eaeee1215ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceThreshold: 125
+--- !u!54 &1065005447982136792
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3968189394148803050}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &-6008185241382143026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3968189394148803050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed35e98e816c9e8478c965a45d8c4068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformZ: 0
+  direction: -1
+  enemyZ: 0
