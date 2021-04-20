@@ -14,6 +14,7 @@ public class GameControlScript : MonoBehaviour
     // initialize in the game editor
     [SerializeField] private int level;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private Text timerText;
     [SerializeField] private Text levelText;
     [SerializeField] private int timer;
@@ -21,6 +22,7 @@ public class GameControlScript : MonoBehaviour
     //public variables manipulated in other scripts
     public float jmpIntensity;
     public bool isPaused = false;
+    public bool isDead = false;
 
     //these are in playerPrefs
     public int health;
@@ -42,8 +44,9 @@ public class GameControlScript : MonoBehaviour
         player.GetComponent<Rigidbody>().useGravity = true;
         player.GetComponent<CharacterController>().enabled = true;
 
-        //makes sure the pause panel isn't active and that time is flowing
+        //makes sure the pause and game over panels aren't active and that time is flowing
         pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
         Time.timeScale = 1;
         
 
@@ -175,7 +178,16 @@ public class GameControlScript : MonoBehaviour
     private void Update()
     {
         if (health <= 0)
-            GameOver();
+        {
+            setGameOver();
+        }
+    }
+
+    public void setGameOver()
+    {
+        isDead = true;
+        Time.timeScale = 0;
+        gameOverPanel.SetActive(true);
     }
 
     //ends the game

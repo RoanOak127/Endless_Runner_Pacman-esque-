@@ -25,28 +25,31 @@ public class CharacterController : MonoBehaviour
     // change position or bring up the menu
     private void Update()
     {
-        //moves the player forward as well as any horizontal direction if the user pushes a button mapped to it
-        transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 1) * Time.deltaTime * gmCtrl.speed;
-
-        //if user pushes a button to jump jump and tell the scripts the player isn't grounded so that they can't jump again until they land
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
+        if (!gmCtrl.isDead)
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * gmCtrl.jmpIntensity, ForceMode.Impulse);
-            isGrounded = false;
-        }
-        // if player pushes down and is in the air fall fast back to the ground
-        if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.W)) && !isGrounded)
-        {
-            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.down * gmCtrl.jmpIntensity * 2, ForceMode.Impulse);
-        }
+            //moves the player forward as well as any horizontal direction if the user pushes a button mapped to it
+            transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 1) * Time.deltaTime * gmCtrl.speed;
 
-        // if player pushes z bring up the pause menu and pause the game
-        // or unpause if already in the menu
-        if (Input.GetKeyDown(KeyCode.Z))
-            if (!gmCtrl.isPaused)
-                gmCtrl.PauseGame();
-            else
-                gmCtrl.ResumeGame();
+            //if user pushes a button to jump jump and tell the scripts the player isn't grounded so that they can't jump again until they land
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
+            {
+                gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * gmCtrl.jmpIntensity, ForceMode.Impulse);
+                isGrounded = false;
+            }
+            // if player pushes down and is in the air fall fast back to the ground
+            if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.W)) && !isGrounded)
+            {
+                gameObject.GetComponent<Rigidbody>().AddForce(Vector3.down * gmCtrl.jmpIntensity * 2, ForceMode.Impulse);
+            }
+
+            // if player pushes z bring up the pause menu and pause the game
+            // or unpause if already in the menu
+            if (Input.GetKeyDown(KeyCode.Z))
+                if (!gmCtrl.isPaused)
+                    gmCtrl.PauseGame();
+                else
+                    gmCtrl.ResumeGame();
+        }
     }
     
     //if player hits an object that has collision
@@ -66,7 +69,7 @@ public class CharacterController : MonoBehaviour
         // if an enemy insta death
         if (collision.gameObject.tag == "Enemy")
         {
-            gmCtrl.GameOver();
+            gmCtrl.setGameOver();
         }
     }
 
@@ -86,7 +89,7 @@ public class CharacterController : MonoBehaviour
         //if they've made contact with death platform game over
         if (other.gameObject.tag == "Death")
         {
-            gmCtrl.GameOver();
+            gmCtrl.setGameOver();
         }
         
         // else these objects need to be destroyed 
